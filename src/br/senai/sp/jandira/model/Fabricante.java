@@ -6,6 +6,10 @@ public class Fabricante {
 	String fundacao;
 	String outrosJogos;
 	
+	public Fabricante(String nome) {
+		this.nome = nome;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
