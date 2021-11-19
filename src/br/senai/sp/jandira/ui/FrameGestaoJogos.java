@@ -61,12 +61,14 @@ public class FrameGestaoJogos extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblTituloJogo = new JLabel("T\u00EDtulo do jogo:");
-		lblTituloJogo.setBounds(20, 20, 96, 30);
+		lblTituloJogo.setForeground(Color.BLACK);
+		lblTituloJogo.setBounds(7, 20, 116, 30);
 		lblTituloJogo.setFont(text);
 		contentPane.add(lblTituloJogo);
 
 		JLabel lblFabricante = new JLabel("Fabricante:");
-		lblFabricante.setBounds(38, 52, 78, 30);
+		lblFabricante.setForeground(Color.BLACK);
+		lblFabricante.setBounds(30, 52, 96, 30);
 		lblFabricante.setFont(text);
 		contentPane.add(lblFabricante);
 
@@ -79,17 +81,20 @@ public class FrameGestaoJogos extends JFrame {
 		lblIcon.setIcon(imgGame);
 
 		JLabel lblConsole = new JLabel("Console:");
-		lblConsole.setBounds(57, 137, 59, 30);
+		lblConsole.setForeground(Color.BLACK);
+		lblConsole.setBounds(49, 137, 78, 30);
 		lblConsole.setFont(text);
 		contentPane.add(lblConsole);
 
 		JLabel lblValorEstimado = new JLabel("Valor estimado:");
-		lblValorEstimado.setBounds(10, 170, 106, 30);
+		lblValorEstimado.setForeground(Color.BLACK);
+		lblValorEstimado.setBounds(0, 170, 121, 30);
 		lblValorEstimado.setFont(text);
 		contentPane.add(lblValorEstimado);
 
 		JLabel lblObservaes = new JLabel("Observa\u00E7\u00F5es:");
-		lblObservaes.setBounds(23, 211, 93, 30);
+		lblObservaes.setForeground(Color.BLACK);
+		lblObservaes.setBounds(12, 211, 111, 30);
 		lblObservaes.setFont(text);
 		contentPane.add(lblObservaes);
 
@@ -106,23 +111,24 @@ public class FrameGestaoJogos extends JFrame {
 		btnSalvar.setBorder(new RoundBtn(25));
 		contentPane.add(btnSalvar);
 
-		JButton btnAnterior = new JButton("\u2191");
-		btnAnterior.setForeground(Color.WHITE);
-		btnAnterior.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
-		btnAnterior.setBackground(new Color(117, 133, 254));
-		btnAnterior.setBounds(410, 352, 70, 38);
-		contentPane.add(btnAnterior);
+		JButton btnUppie = new JButton("\u2191");
+		btnUppie.setForeground(Color.WHITE);
+		btnUppie.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
+		btnUppie.setBackground(new Color(117, 133, 254));
+		btnUppie.setBounds(410, 352, 70, 38);
+		contentPane.add(btnUppie);
 
-		JButton btnSeguinte = new JButton("\u2193");
-		btnSeguinte.setForeground(Color.WHITE);
-		btnSeguinte.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
-		btnSeguinte.setBackground(new Color(117, 133, 254));
-		btnSeguinte.setBounds(490, 352, 70, 38);
-		contentPane.add(btnSeguinte);
+		JButton btnDowntown = new JButton("\u2193");
+		btnDowntown.setForeground(Color.WHITE);
+		btnDowntown.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
+		btnDowntown.setBackground(new Color(117, 133, 254));
+		btnDowntown.setBounds(490, 352, 70, 38);
+		contentPane.add(btnDowntown);
 
 		JLabel lblMeusJogos = new JLabel("Meus Jogos:");
+		lblMeusJogos.setForeground(Color.BLACK);
 		lblMeusJogos.setFont(new Font("Corbel Light", Font.BOLD, 16));
-		lblMeusJogos.setBounds(382, 20, 83, 30);
+		lblMeusJogos.setBounds(382, 20, 116, 30);
 		contentPane.add(lblMeusJogos);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -159,15 +165,19 @@ public class FrameGestaoJogos extends JFrame {
 		txtValor.setBounds(126, 173, 198, 20);
 		contentPane.add(txtValor);
 
-		JCheckBox chckbxZerado = new JCheckBox("Zerado");
-		chckbxZerado.setBounds(129, 96, 78, 23);
-		contentPane.add(chckbxZerado);
+		JCheckBox cbZerado = new JCheckBox("Zerado");
+		cbZerado.setBounds(129, 96, 78, 23);
+		contentPane.add(cbZerado);
 		
 		FabricanteRepository fabricantes = new FabricanteRepository();
 		JComboBox comboFabricante = new JComboBox();
 		comboFabricante.setBackground(new Color(117, 133, 254));
 		comboFabricante.setForeground(new Color(255, 255, 255));
-		DefaultComboBoxModel<Fabricante> modelFabricantes = new DefaultComboBoxModel<Fabricante>(fabricantes.getFabricantes());
+		DefaultComboBoxModel<String> modelFabricantes = new DefaultComboBoxModel<String>();
+		for (Fabricante f : fabricantes.getFabricantes()) {
+			modelFabricantes.addElement(f.getNome());
+		}
+		
 		
 		comboFabricante.setModel(modelFabricantes);
 		
@@ -197,15 +207,20 @@ public class FrameGestaoJogos extends JFrame {
 
 				Jogo jogo = new Jogo();
 				jogo.setTitulo(txtTituloJogo.getText());
+				
+				FabricanteRepository fabricantes = new FabricanteRepository();
+//				jogo.setFabricante(comboFabricante.getSelectedIndex());
 
-				jogo.setConsole(Console.values()[comboConsole.getSelectedIndex()]);
-
+				jogo.setFabricante(fabricantes.getFabricantes()[comboFabricante.getSelectedIndex()]);
+				
 				// Boolean
-				if (chckbxZerado.isSelected()) {
+				if (cbZerado.isSelected()) {
 					jogo.setZerado(true);
 				} else {
 					jogo.setZerado(false);
 				}
+				
+				jogo.setConsole(Console.values()[comboConsole.getSelectedIndex()]);
 				
 				double valor = Double.parseDouble(txtValor.getText());
 
@@ -223,27 +238,40 @@ public class FrameGestaoJogos extends JFrame {
 				if (posicao == colecao.getTamanho()) {
 					btnSalvar.setEnabled(false);
 
-					JOptionPane.showMessageDialog(null, "A coleção ja está cheia!!", "Cheio",
+					JOptionPane.showMessageDialog(null, "Sua coleção está cheia!!", "Cheio",
 							JOptionPane.WARNING_MESSAGE);
 
 				}
 			}
 		});
 		
-		btnAnterior.addActionListener(new ActionListener() {
+		btnUppie.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-	//			listJogos.setSelectionMode(listJogos.getSelectedIndex() - 1);
+
+				if (listJogos.getSelectedIndex() > 0) {
+					int indiceAnterior = listJogos.getSelectedIndex() - 1;
+					listJogos.setSelectedIndex(indiceAnterior);
+				} else {
+					listJogos.setSelectedIndex(listJogos.getLastVisibleIndex());
+				}
 			}
-		});
+				
+				
+			});
 		
-		btnSeguinte.addActionListener(new ActionListener() {
+		btnDowntown.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-//				listJogos.setSelectionMode(listJogos.getSelectedIndex() + 1);
+				if (listJogos.getSelectedIndex() < listJogos.getLastVisibleIndex()) {
+					int indiceSeguinte = listJogos.getSelectedIndex() + 1;
+					listJogos.setSelectedIndex(indiceSeguinte);
+				} else {
+					listJogos.setSelectedIndex(0);
+				}
 				
 			}
 		});
@@ -259,12 +287,9 @@ public class FrameGestaoJogos extends JFrame {
 				Jogo jogo = colecao.listarJogo(listJogos.getSelectedIndex());
 				txtTituloJogo.setText(jogo.getTitulo());
 				
-				Fabricante fabricante = fabricantes.listarFabricante(listJogos.getSelectedIndex());
+				comboFabricante.setSelectedIndex(fabricantes.getIndexOf(jogo.getFabricante()));
 				
-				comboFabricante.setSelectedItem(fabricantes.getFabricantes()); 
-				
-//				chckbxZerado.setSelected 
-				
+				cbZerado.setSelected(jogo.isZerado());
 				
 				txtValor.setText("" + jogo.getValor());
 				

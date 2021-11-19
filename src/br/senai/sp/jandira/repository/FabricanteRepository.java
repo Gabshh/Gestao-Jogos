@@ -29,6 +29,15 @@ public class FabricanteRepository {
 		return fabricantes;
 	}
 	
+	public Fabricante getFabricantes(String nomeFabricante) {
+		for ( Fabricante f : fabricantes ) {
+			if ( f.getNome().equalsIgnoreCase(nomeFabricante) ) {
+				return f;
+			}
+		}
+		return null;
+	}
+	
 	public int getTamanho() {
 		return fabricantes.length;
 	}
@@ -43,6 +52,16 @@ public class FabricanteRepository {
 	
 	public Fabricante[] listarTodos() {
 		return fabricantes;
+	}
+	
+	public int getIndexOf (Fabricante fabricante) {
+		for (int i = 0; i < fabricantes.length; i++) {
+			if (fabricantes[i].equals(fabricante)) {
+				return i;
+			}
+		}
+		
+		return 0;
 	}
 	
 }
