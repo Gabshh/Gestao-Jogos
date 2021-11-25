@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -111,19 +112,19 @@ public class FrameGestaoJogos extends JFrame {
 		btnSalvar.setBorder(new RoundBtn(25));
 		contentPane.add(btnSalvar);
 
-		JButton btnUppie = new JButton("\u2191");
-		btnUppie.setForeground(Color.WHITE);
-		btnUppie.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
-		btnUppie.setBackground(new Color(117, 133, 254));
-		btnUppie.setBounds(410, 352, 70, 38);
-		contentPane.add(btnUppie);
+		JButton btnAnterior = new JButton("\u2191");
+		btnAnterior.setForeground(Color.WHITE);
+		btnAnterior.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
+		btnAnterior.setBackground(new Color(117, 133, 254));
+		btnAnterior.setBounds(410, 352, 70, 38);
+		contentPane.add(btnAnterior);
 
-		JButton btnDowntown = new JButton("\u2193");
-		btnDowntown.setForeground(Color.WHITE);
-		btnDowntown.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
-		btnDowntown.setBackground(new Color(117, 133, 254));
-		btnDowntown.setBounds(490, 352, 70, 38);
-		contentPane.add(btnDowntown);
+		JButton btnSeguinte = new JButton("\u2193");
+		btnSeguinte.setForeground(Color.WHITE);
+		btnSeguinte.setBorder(new br.senai.sp.jandira.ui.RoundBtn(25));
+		btnSeguinte.setBackground(new Color(117, 133, 254));
+		btnSeguinte.setBounds(490, 352, 70, 38);
+		contentPane.add(btnSeguinte);
 
 		JLabel lblMeusJogos = new JLabel("Meus Jogos:");
 		lblMeusJogos.setForeground(Color.BLACK);
@@ -245,7 +246,7 @@ public class FrameGestaoJogos extends JFrame {
 			}
 		});
 		
-		btnUppie.addActionListener(new ActionListener() {
+		btnAnterior.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -261,7 +262,7 @@ public class FrameGestaoJogos extends JFrame {
 				
 			});
 		
-		btnDowntown.addActionListener(new ActionListener() {
+		btnSeguinte.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -287,7 +288,8 @@ public class FrameGestaoJogos extends JFrame {
 				Jogo jogo = colecao.listarJogo(listJogos.getSelectedIndex());
 				txtTituloJogo.setText(jogo.getTitulo());
 				
-				comboFabricante.setSelectedIndex(fabricantes.getIndexOf(jogo.getFabricante()));
+//				comboFabricante.setSelectedIndex(fabricantes.getIndexOf(jogo.getFabricante()));
+				comboFabricante.setSelectedIndex(Arrays.asList(fabricantes.getFabricantes()).indexOf(jogo.getFabricante()));
 				
 				cbZerado.setSelected(jogo.isZerado());
 				
