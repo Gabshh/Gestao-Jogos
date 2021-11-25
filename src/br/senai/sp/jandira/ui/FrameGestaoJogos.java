@@ -47,6 +47,8 @@ public class FrameGestaoJogos extends JFrame {
 	private int posicao = 0;
 	
 	public FrameGestaoJogos() {
+		
+		FabricanteRepository fabricantes = new FabricanteRepository();
 		setResizable(false);
 		setTitle("Gest\u00E3o de Jogos");
 		setBackground(new Color(204, 204, 255));
@@ -170,7 +172,6 @@ public class FrameGestaoJogos extends JFrame {
 		cbZerado.setBounds(129, 96, 78, 23);
 		contentPane.add(cbZerado);
 		
-		FabricanteRepository fabricantes = new FabricanteRepository();
 		JComboBox comboFabricante = new JComboBox();
 		comboFabricante.setBackground(new Color(117, 133, 254));
 		comboFabricante.setForeground(new Color(255, 255, 255));
@@ -209,8 +210,6 @@ public class FrameGestaoJogos extends JFrame {
 				Jogo jogo = new Jogo();
 				jogo.setTitulo(txtTituloJogo.getText());
 				
-				FabricanteRepository fabricantes = new FabricanteRepository();
-//				jogo.setFabricante(comboFabricante.getSelectedIndex());
 
 				jogo.setFabricante(fabricantes.getFabricantes()[comboFabricante.getSelectedIndex()]);
 				
@@ -241,8 +240,15 @@ public class FrameGestaoJogos extends JFrame {
 
 					JOptionPane.showMessageDialog(null, "Sua coleção está cheia!!", "Cheio",
 							JOptionPane.WARNING_MESSAGE);
-
 				}
+				
+				txtTituloJogo.setText(null);
+				comboFabricante.setSelectedIndex(0);
+				cbZerado.setSelected(false);
+				comboConsole.setSelectedIndex(0);
+				txtValor.setText(null);
+				txtObservacoes.setText(null);
+				
 			}
 		});
 		
@@ -288,8 +294,8 @@ public class FrameGestaoJogos extends JFrame {
 				Jogo jogo = colecao.listarJogo(listJogos.getSelectedIndex());
 				txtTituloJogo.setText(jogo.getTitulo());
 				
-//				comboFabricante.setSelectedIndex(fabricantes.getIndexOf(jogo.getFabricante()));
-				comboFabricante.setSelectedIndex(Arrays.asList(fabricantes.getFabricantes()).indexOf(jogo.getFabricante()));
+				comboFabricante.setSelectedIndex(fabricantes.getIndexOf(jogo.getFabricante()));
+				
 				
 				cbZerado.setSelected(jogo.isZerado());
 				

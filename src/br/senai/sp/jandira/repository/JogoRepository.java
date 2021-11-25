@@ -9,7 +9,7 @@ private Jogo[] colecao;
 	// Construtor Padrão:
 
 	public JogoRepository() {
-		colecao = new Jogo[3];
+		colecao = new Jogo[50];
 	}
 	
 	// Construtor flexível:

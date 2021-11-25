@@ -29,6 +29,12 @@ public class Fabricante {
 		this.outrosJogos = outrosJogos;
 	}
 	
+	@Override
+	public String toString() {
+		return "Fabricante { \n nome: " + nome + "}";
+	
+	}
+	
 	
 
 }
